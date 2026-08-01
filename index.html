@@ -402,7 +402,8 @@
     const data = await res.json();
     if (!Array.isArray(data) || data.length === 0) throw new Error('sin datos');
 
-    const repos = data.filter(r => !r.fork);
+    const excluded = ['oscar-perez-portafolio', 'portafolio', 'portfolio'];
+    const repos = data.filter(r => !r.fork && !excluded.includes(r.name.toLowerCase()));
     render(repos);
     repoCount.textContent = `${repos.length} proyectos`;
     stateMsg.style.display = 'none';
