@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oscar Pérez — Desarrollo web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,440;9..144,560&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --paper:#fafaf8;
+    --ink:#0c0c0b;
+    --muted:#6d6d68;
+    --line:#dcdcd6;
+    --line-strong:#0c0c0b;
+    --max:1040px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(6px);
+    z-index:10;
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+    font-size:12.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .nav .mark{font-weight:500; letter-spacing:.02em;}
+  .nav ul{list-style:none; display:flex; gap:28px;}
+  .nav a{text-decoration:none; opacity:.7; transition:opacity .15s;}
+  .nav a:hover{opacity:1;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:104px 0 88px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:26px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--ink);
+    border-radius:50%;
+    display:inline-block;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:440;
+    font-size:clamp(46px, 8vw, 92px);
+    line-height:.98;
+    letter-spacing:-.01em;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:340;
+  }
+  .hero p{
+    max-width:520px;
+    margin-top:30px;
+    font-size:15px;
+    color:#3a3a37;
+  }
+  .hero .lede-line{
+    margin-top:44px;
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+  .hero .lede-line strong{color:var(--ink); font-weight:500;}
+
+  /* ---------- section heads ---------- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    padding:56px 0 30px;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:440;
+    font-size:30px;
+    letter-spacing:-.005em;
+  }
+  .section-head .count{
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.06em;
+  }
+
+  /* ---------- project grid ---------- */
+  #proyectos{padding-bottom:90px;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:22px;
+  }
+  @media (max-width:680px){
+    .grid{grid-template-columns:1fr;}
+  }
+
+  .card{
+    border:1px solid var(--line);
+    background:var(--paper);
+    display:flex;
+    flex-direction:column;
+    transition:border-color .18s, transform .18s;
+  }
+  .card:hover{
+    border-color:var(--line-strong);
+    transform:translateY(-2px);
+  }
+
+  .chrome{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:11px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .chrome .dot{
+    width:7px; height:7px;
+    border-radius:50%;
+    border:1px solid var(--muted);
+  }
+  .chrome .bar{
+    flex:1;
+    margin-left:8px;
+    font-size:11px;
+    color:var(--muted);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:3px 8px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .card-body{
+    padding:20px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-body h3{
+    font-family:'Fraunces', serif;
+    font-weight:440;
+    font-size:21px;
+    margin-bottom:8px;
+  }
+  .card-body p{
+    font-size:12.5px;
+    color:var(--muted);
+    flex:1;
+    margin-bottom:16px;
+  }
+  .card-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:11px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .card-foot .lang{
+    display:flex; align-items:center; gap:6px;
+  }
+  .card-foot .lang::before{
+    content:"";
+    width:6px; height:6px;
+    background:var(--ink);
+    display:inline-block;
+  }
+  .card-links{display:flex; gap:14px;}
+  .card-links a{text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:1px;}
+  .card-links a:hover{color:var(--muted); border-color:var(--muted);}
+
+  .state-msg{
+    font-size:12.5px;
+    color:var(--muted);
+    padding:8px 0 24px;
+  }
+
+  /* ---------- about / contact ---------- */
+  #contacto{
+    border-top:1px solid var(--line);
+    padding:80px 0 60px;
+  }
+  #contacto h2{
+    font-family:'Fraunces', serif;
+    font-weight:440;
+    font-size:38px;
+    max-width:560px;
+    line-height:1.1;
+    margin-bottom:26px;
+  }
+  .contact-links{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    font-size:13px;
+  }
+  .contact-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:2px;
+  }
+  .contact-links a:hover{opacity:.6;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:20px 0 40px;
+    font-size:11px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    letter-spacing:.03em;
+  }
+
+  ::selection{background:var(--ink); color:var(--bg);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <span class="mark">Oscar Pérez</span>
+    <ul>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://github.com/ozcarprez" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Portafolio</div>
+    <h1>Desarrollo <em>web</em>.</h1>
+    <p>Desarrollo de sitios web para negocios: restaurantes, tiendas, distribuidoras y servicios. HTML, CSS y JavaScript.</p>
+    <div class="lede-line">
+      <span><strong>14</strong> proyectos</span>
+      <span>Baja California, MX</span>
+      <span><strong>HTML · CSS · JS</strong></span>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Proyectos</h2>
+      <span class="count" id="repo-count">cargando desde GitHub…</span>
+    </div>
+    <p class="state-msg" id="state-msg">Obteniendo repositorios públicos de github.com/ozcarprez…</p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <h2>Contacto</h2>
+    <div class="contact-links">
+      <a href="https://github.com/ozcarprez" target="_blank" rel="noopener">github.com/ozcarprez</a>
+      <a href="mailto:ozcarprez@gmail.com">ozcarprez@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Oscar Pérez</span>
+    <span>Hecho a mano, sin plantillas</span>
+  </div>
+</footer>
+
+<script>
+(async () => {
+  const grid = document.getElementById('grid');
+  const stateMsg = document.getElementById('state-msg');
+  const repoCount = document.getElementById('repo-count');
+
+  // Fallback: known repos in case the live API call fails (rate limit / offline)
+  const fallback = [
+    { name:'ventadoc', description:'Sitio web de negocio.', html_url:'https://github.com/ozcarprez/ventadoc', homepage:'https://ventadoc.vercel.app', language:'HTML' },
+    { name:'ventaconecta2', description:'Sitio web de negocio.', html_url:'https://github.com/ozcarprez/ventaconecta2', homepage:'https://ventaconecta2.vercel.app', language:'HTML' },
+    { name:'restaurante-majo', description:'Sitio web para restaurante.', html_url:'https://github.com/ozcarprez/restaurante-majo', homepage:'https://restaurante-majo.vercel.app', language:'HTML' },
+    { name:'menu-majo', description:'Menú digital para restaurante.', html_url:'https://github.com/ozcarprez/menu-majo', homepage:'https://menu-majo.vercel.app', language:'HTML' },
+    { name:'formulario-majo', description:'Formulario web para restaurante.', html_url:'https://github.com/ozcarprez/formulario-majo', homepage:'https://formulario-majo.vercel.app', language:'HTML' },
+    { name:'papayafreshinc', description:'Sitio web de negocio.', html_url:'https://github.com/ozcarprez/papayafreshinc', homepage:'https://papayafreshinc.vercel.app', language:'HTML' },
+    { name:'purificadora-el-canon', description:'Sitio web para purificadora de agua.', html_url:'https://github.com/ozcarprez/purificadora-el-canon', homepage:'https://purificadora-el-canon.vercel.app', language:'HTML' },
+    { name:'formulario-purificadora', description:'Formulario web para purificadora.', html_url:'https://github.com/ozcarprez/formulario-purificadora', homepage:'https://formulario-purificadora.vercel.app', language:'HTML' },
+    { name:'colonet-website', description:'Sitio web de negocio.', html_url:'https://github.com/ozcarprez/colonet-website', homepage:'https://colonet-website.vercel.app', language:'HTML' },
+    { name:'nuvi-app', description:'Aplicación web.', html_url:'https://github.com/ozcarprez/nuvi-app', homepage:'https://nuvi-app-gamma.vercel.app', language:'HTML' },
+    { name:'sunny-specialty', description:'Sitio web de negocio.', html_url:'https://github.com/ozcarprez/sunny-specialty', homepage:'https://sunny-specialty.vercel.app', language:'HTML' },
+    { name:'hallazgos-tj', description:'Sitio web / aplicación.', html_url:'https://github.com/ozcarprez/hallazgos-tj', homepage:'https://hallazgos-tj.vercel.app', language:'HTML' },
+    { name:'cabo-vivo', description:'Sitio web de negocio.', html_url:'https://github.com/ozcarprez/cabo-vivo', homepage:'https://cabo-vivo.vercel.app', language:'HTML' }
+  ];
+
+  // URLs reales de producción (Vercel) para cada repo
+  const vercelSites = {
+    'ventadoc': 'https://ventadoc.vercel.app',
+    'restaurante-majo': 'https://restaurante-majo.vercel.app',
+    'nuvi-app': 'https://nuvi-app-gamma.vercel.app',
+    'sunny-specialty': 'https://sunny-specialty.vercel.app',
+    'colonet-website': 'https://colonet-website.vercel.app',
+    'hallazgos-tj': 'https://hallazgos-tj.vercel.app',
+    'formulario-purificadora': 'https://formulario-purificadora.vercel.app',
+    'formulario-majo': 'https://formulario-majo.vercel.app',
+    'ventaconecta2': 'https://ventaconecta2.vercel.app',
+    'purificadora-el-canon': 'https://purificadora-el-canon.vercel.app',
+    'papayafreshinc': 'https://papayafreshinc.vercel.app',
+    'menu-majo': 'https://menu-majo.vercel.app',
+    'cabo-vivo': 'https://cabo-vivo.vercel.app'
+  };
+
+  function fakeUrl(repo){
+    const site = vercelSites[repo.name];
+    if (site) { try { return new URL(site).host; } catch(e){ return site; } }
+    if (repo.homepage && repo.homepage.trim()) {
+      try { return new URL(repo.homepage).host + new URL(repo.homepage).pathname.replace(/\/$/, ''); }
+      catch(e){ return repo.homepage; }
+    }
+    return `github.com/ozcarprez/${repo.name}`;
+  }
+
+  function render(repos){
+    grid.innerHTML = '';
+    repos.forEach(repo => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const liveLink = vercelSites[repo.name] || (repo.homepage && repo.homepage.trim() ? repo.homepage : null);
+
+      card.innerHTML = `
+        <div class="chrome">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="bar">${fakeUrl(repo)}</span>
+        </div>
+        <div class="card-body">
+          <h3>${repo.name}</h3>
+          <p>${repo.description ? repo.description : 'Sitio web desarrollado a la medida.'}</p>
+          <div class="card-foot">
+            <span class="lang">${repo.language || 'HTML'}</span>
+            <span class="card-links">
+              ${liveLink ? `<a href="${liveLink}" target="_blank" rel="noopener">Ver sitio</a>` : ''}
+            </span>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  try {
+    const res = await fetch('https://api.github.com/users/ozcarprez/repos?per_page=100&sort=updated');
+    if (!res.ok) throw new Error('rate limit o error de red');
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) throw new Error('sin datos');
+
+    const repos = data.filter(r => !r.fork);
+    render(repos);
+    repoCount.textContent = `${repos.length} proyectos`;
+    stateMsg.style.display = 'none';
+  } catch (err) {
+    render(fallback);
+    repoCount.textContent = `${fallback.length} proyectos`;
+    stateMsg.style.display = 'none';
+  }
+})();
+</script>
+
+</body>
+</html>
